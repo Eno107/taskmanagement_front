@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Show } from '@clerk/react'
 import { SignInPage } from './pages/SignInPage'
 import { SignUpPage } from './pages/SignUpPage'
+import { SignUpCompletePage } from './pages/SignUpCompletePage'
 import { DashboardPage } from './pages/DashboardPage'
 
 function App() {
@@ -21,6 +22,14 @@ function App() {
           element={
             <Show when="signed-out" fallback={<Navigate to="/dashboard" replace />}>
               <SignUpPage />
+            </Show>
+          }
+        />
+        <Route
+          path="/sign-up/complete"
+          element={
+            <Show when="signed-in" fallback={<Navigate to="/sign-up" replace />}>
+              <SignUpCompletePage />
             </Show>
           }
         />

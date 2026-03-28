@@ -12,7 +12,15 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={PUBLISHABLE_KEY}
+      appearance={{
+        elements: {
+          headerTitle: { pointerEvents: 'none' },
+          logoBox: { pointerEvents: 'none', cursor: 'default' },
+        },
+      }}
+    >
       <App />
     </ClerkProvider>
   </StrictMode>,
