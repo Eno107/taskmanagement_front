@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@clerk/react'
 import { Navigate, Outlet } from 'react-router-dom'
-
-const API_URL = import.meta.env.VITE_API_URL
+import { getMe } from '../api/users'
 
 export function ProtectedLayout() {
   const { isLoaded, isSignedIn, getToken } = useAuth()
@@ -14,16 +13,13 @@ export function ProtectedLayout() {
 
       try {
         const token = await getToken()
-        const response = await fetch(`${API_URL}/users/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-
-        if (response.ok) {
-          setStatus('verified')
-        } else {
-          console.error(`GET /users/me failed: ${response.status}`)
+        if (!token) {
           setStatus('no-db-user')
+          return
         }
+
+        const user = await getMe(token)
+        setStatus(user ? 'verified' : 'no-db-user')
       } catch (err) {
         console.error('Failed to verify user:', err)
         setStatus('no-db-user')

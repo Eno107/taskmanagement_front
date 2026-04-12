@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { PublicLayout } from './layouts/PublicLayout'
 import { ProtectedLayout } from './layouts/ProtectedLayout'
-import { SignInPage } from './pages/SignInPage'
-import { SignUpPage } from './pages/SignUpPage'
-import { SignUpCompletePage } from './pages/SignUpCompletePage'
-import { DashboardPage } from './pages/DashboardPage'
+import { SignInPage } from './features/auth/SignInPage'
+import { SignUpPage } from './features/auth/SignUpPage'
+import { SignUpCompletePage } from './features/auth/SignUpCompletePage'
+import { DashboardPage } from './features/dashboard/DashboardPage'
 
 function App() {
   return (
